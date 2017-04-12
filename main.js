@@ -1,7 +1,8 @@
 var data = [
-    {"clone": "A", "prev": 0.1},
+    {"clone": "A", "prev": 0.01},
     {"clone": "B", "prev": 0.6},
-    {"clone": "C", "prev": 0.3}
+    {"clone": "C", "prev": 0.3},
+    {"clone": "D", "prev": 0.09}
 ];
 
 d3.select("body").attr("height", "100%")
@@ -23,14 +24,14 @@ var tumourDonut = new TumourDonut({
     outerRadius: r - 10,
     d3Element: viewSVG,
     data: data,
-    padAngle: 0.1,
-    cornerRadius: 30
+    padAngle: 0.02,
+    cornerRadius: 3
 });
 
 var voronoiOverlay = new VoronoiOverlay({
     cx: cx,
     cy: cy,
     r: r,
-    strokeWidth: 2,
+    strokeWidth: 1,
     d3Element: viewSVG
 });
