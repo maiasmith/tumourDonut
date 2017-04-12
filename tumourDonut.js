@@ -1,9 +1,13 @@
 var TumourDonut = function(opts) {
-    this.cx = opts.cx || 0;
-    this.cy = opts.cy || 0;
-    this.r = opts.r || 50;
+    this.cx = (typeof opts.cx != "undefined") ? opts.cx : 0;
+    this.cy = (typeof opts.cy != "undefined") ? opts.cy : 0;
+    this.r = (typeof opts.r != "undefined") ? opts.r : 50;
     this.element = opts.d3Element;
     this.data = opts.data;
+    this.padAngle = (typeof opts.padAngle != "undefined") ? opts.padAngle : 0.03;
+    this.cornerRadius = (typeof opts.cornerRadius != "undefined") ? opts.cornerRadius : 8;
+    this.innerRadius = (typeof opts.innerRadius != "undefined") ? opts.innerRadius : this.r - 30;
+    this.outerRadius = (typeof opts.outerRadius != "undefined") ? opts.outerRadius : this.r - 10;
 
     this.draw();
 }
@@ -14,15 +18,14 @@ TumourDonut.prototype.draw = function() {
         .classed("donutG", true)
         .attr("transform", "translate(" + this.cx + "," + this.cy + ")");
 
-
     var color = d3.scaleOrdinal()
-        .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+        .range(["#7fc97f", "#beaed4", "#fdc086", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
 
     var arc = d3.arc()
-        .outerRadius(this.r - 10)
-        .innerRadius(this.r - 70)
-        .padAngle(0.03)
-        .cornerRadius(8);
+        .outerRadius(this.outerRadius)
+        .innerRadius(this.innerRadius)
+        .padAngle(this.padAngle)
+        .cornerRadius(this.cornerRadius);
 
     var pie = d3.pie()
         .sort(null)
