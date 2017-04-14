@@ -15,13 +15,15 @@ var viewSVG = viewDIV.append("svg").attr("width", "100%").attr("height", "100%")
 var cx = 250;
 var cy = 250;
 var r = 100;
+var outerR = 100;
+var innerR = 30;
 
 var tumourDonut = new TumourDonut({
     cx: cx,
     cy: cy,
     r: r,
-    innerRadius: r - 70,
-    outerRadius: r - 10,
+    innerRadius: innerR,
+    outerRadius: outerR,
     d3Element: viewSVG,
     data: data,
     padAngle: 0.02,
@@ -31,7 +33,8 @@ var tumourDonut = new TumourDonut({
 var voronoiOverlay = new VoronoiOverlay({
     cx: cx,
     cy: cy,
-    r: r,
+    outerR: outerR,
+    innerR: innerR,
     strokeWidth: 1,
     d3Element: viewSVG
 });
