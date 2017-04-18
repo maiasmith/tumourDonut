@@ -38,5 +38,10 @@ TumourDonut.prototype.draw = function() {
 
     slices.append("path")
         .attr("d", arc)
-        .style("fill", function(d) { return color(d.data.clone); });
+        .style("fill", function(d) { 
+            if (!d.data.colour) {
+                return color(d.data.clone)
+            }
+            return d.data.colour; 
+        });
 }

@@ -1,8 +1,8 @@
 var data = [
-    {"clone": "A", "prev": 0.01},
-    {"clone": "B", "prev": 0.6},
-    {"clone": "C", "prev": 0.3},
-    {"clone": "D", "prev": 0.09}
+    {"clone": "A", "prev": 0.01, "colour": "blue"},
+    {"clone": "B", "prev": 0.6, "colour": "pink"},
+    {"clone": "C", "prev": 0.3, "colour": "yellow"},
+    {"clone": "D", "prev": 0.09, "colour": "red"}
 ];
 
 d3.select("body").attr("height", "100%")
