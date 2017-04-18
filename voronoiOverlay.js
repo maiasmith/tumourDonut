@@ -27,22 +27,38 @@ VoronoiOverlay.prototype.draw = function() {
         .attr("fill-opacity", function(d) {
 
             // for each point in the polygon
-            var outsideDonut = false;
+            var withinDonut = true;
             d.forEach(function(pt) {
-                // if the dist from the center to this point is > the specified radius
-                // fill it with white
+                // if the dist from the center to this point is > the specified outer radius
+                // or < the specified inner radius, fill it with white
                 var a = _this.outerR - pt[0];
                 var b = _this.outerR - pt[1];
                 var c = Math.sqrt( a*a + b*b );                
                 if (c > _this.outerR) {
-                    outsideDonut = true;
+                    withinDonut = false;
                 }
                 if (c < _this.innerR) {
+                    withinDonut = false;
+                }
+            })
+
+            return (!withinDonut) ? 1 : 0;
+        })
+        .attr("display", function(d) {
+             // for each point in the polygon
+            var outsideDonut = false;
+            d.forEach(function(pt) {
+                // if the dist from the center to this point is > the specified outer radius
+                // do not display it
+                var a = _this.outerR - pt[0];
+                var b = _this.outerR - pt[1];
+                var c = Math.sqrt( a*a + b*b );                
+                if ((c-10) > _this.outerR) { // give 10px leeway
                     outsideDonut = true;
                 }
             })
 
-            return (outsideDonut) ? 1 : 0;
+            return (outsideDonut) ? "none" : "auto";
         })
         .call(redrawPolygon);
 }
